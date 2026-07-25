@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AINS+ AutoFill — Isi Rekod NILAM Secara Automatik</title>
+<title>AINS+ Reader Helper — Baca Dahulu, Rekod NILAM Terisi</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
@@ -196,11 +196,6 @@
   .step h3 { font-size: 17.5px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
   .step p { font-size: 14.5px; color: var(--muted); }
 
-  .capability-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
   .capability-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -225,13 +220,7 @@
     border: 1px solid rgba(52,211,153,0.3);
   }
   .can .capability-icon svg { width: 17px; height: 17px; color: var(--mint); }
-  .cant .capability-icon {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-  }
-  .cant .capability-icon svg { width: 17px; height: 17px; color: var(--muted); }
   .capability-head h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
-  .cant .capability-head h3 { color: var(--muted); }
   .capability-card ul { list-style: none; }
   .capability-card li {
     display: flex; align-items: flex-start; gap: 11px;
@@ -241,10 +230,8 @@
   }
   .capability-card li:first-of-type { border-top: none; padding-top: 0; }
   .can li { color: var(--text); }
-  .cant li { color: var(--muted); }
   .capability-card li svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 3px; }
   .can li svg { color: var(--mint); }
-  .cant li svg { color: rgba(255,255,255,0.22); }
 
   .pricing-grid {
     display: grid;
@@ -388,7 +375,7 @@
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
   @media (max-width: 720px) {
-    .steps, .pricing-grid, .capability-grid { grid-template-columns: 1fr; }
+    .steps, .pricing-grid { grid-template-columns: 1fr; }
     .hero { padding: 76px 0 56px; }
     .plan.featured { transform: none; }
     .plan.featured:hover { transform: translateY(-4px); }
@@ -403,7 +390,7 @@
       <span class="logo-mark">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5C4 3.67 4.67 3 5.5 3H12V21H5.5C4.67 21 4 20.33 4 19.5V4.5Z" fill="white" fill-opacity="0.9"/><path d="M20 4.5C20 3.67 19.33 3 18.5 3H12V21H18.5C19.33 21 20 20.33 20 19.5V4.5Z" fill="white" fill-opacity="0.6"/></svg>
       </span>
-      AINS+ AutoFill
+      AINS+ Reader Helper
     </div>
     <div class="header-tag">Untuk murid Malaysia</div>
   </div>
@@ -415,19 +402,20 @@
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5H11L10 22L19.5 9.5H13L13 2Z" fill="currentColor"/></svg>
       Chrome Extension
     </span>
-    <h1>Isi rekod NILAM anda dalam <em>saat</em>, bukan berjam-jam.</h1>
+    <h1>Baca dahulu, <em>rekod anda terisi</em> dalam saat.</h1>
     <p class="lede">
-      AINS+ AutoFill mengisi borang rekod bacaan dalam sistem AINS+ (Advanced Integrated NILAM System)
-      secara automatik, terus daripada senarai buku yang anda catat dalam Excel.
+      AINS+ Reader Helper paparkan bahan bacaan untuk anda baca dahulu, kemudian bantu isikan
+      rekod dalam sistem AINS+ (Advanced Integrated NILAM System) — terus daripada senarai buku
+      yang anda catat dalam Excel.
     </p>
     <div class="badge-row">
       <span class="badge">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Isi automatik, tanpa taip berulang
+        Wajib baca dahulu, baru diisi
       </span>
       <span class="badge">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Koleksi buku siap isi
+        Koleksi bacaan siap baca
       </span>
       <span class="badge">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -441,7 +429,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Cara ia berfungsi</span>
-      <h2>Tiga langkah, tiada taip berulang</h2>
+      <h2>Tiga langkah — murid baca dahulu</h2>
     </div>
     <div class="steps">
       <div class="step">
@@ -449,24 +437,24 @@
         <div class="step-icon">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         </div>
-        <h3>Catat bacaan anda</h3>
-        <p>Muat turun template Excel dalam extension, dan catat buku yang telah anda baca — tajuk, penulis, rumusan ringkas.</p>
+        <h3>Pilih bahan bacaan</h3>
+        <p>Catat bacaan anda sendiri dalam Excel, atau pilih terus daripada Koleksi Premium dalam panel extension.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
         <div class="step-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5C10.5 3 8 2.5 4 3v14c4 -0.5 6.5 0 8 1.5c1.5 -1.5 4 -2 8 -1.5V3c-4 -0.5 -6.5 0 -8 1.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 4.5V18.5" stroke="currentColor" stroke-width="1.7"/></svg>
         </div>
-        <h3>Muat naik ke extension</h3>
-        <p>Buka AINS+, klik panel AINS+ AutoFill, dan pilih fail Excel anda.</p>
+        <h3>Baca &amp; sahkan</h3>
+        <p>Panel paparkan Cerita Pendek, Rumusan &amp; Pengajaran — anda baca, kemudian sahkan "Sedia untuk Isi Rekod Ini".</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-icon">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5H11L10 22L19.5 9.5H13L13 2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         </div>
-        <h3>Klik "Isi Sekarang"</h3>
-        <p>Extension mengisi dan menghantar setiap rekod secara automatik, satu demi satu.</p>
+        <h3>Rekod terus diisi</h3>
+        <p>Selepas bacaan disahkan, Reader Helper mengisi dan menghantar rekod ke AINS+ secara automatik.</p>
       </div>
     </div>
   </div>
@@ -475,40 +463,26 @@
 <section>
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">Kejujuran dahulu</span>
-      <h2>Apa yang extension ini boleh — dan tidak — buat</h2>
+      <span class="section-eyebrow">Bukan sekadar auto-isi</span>
+      <h2>Wajib baca dahulu, baru rekod diisi</h2>
+      <p style="color:var(--muted); font-size:15.5px; margin-top:14px;">
+        Reader Helper sengaja dibina supaya murid tidak boleh langkau bahagian membaca.
+        Kandungan bacaan mesti dipaparkan dan disahkan dahulu sebelum mana-mana rekod dihantar ke AINS+.
+      </p>
     </div>
-    <div class="capability-grid">
-      <div class="capability-card can">
-        <div class="capability-head">
-          <span class="capability-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <h3>Boleh dibuat</h3>
-        </div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Isi rekod Artikel/Jurnal/Lain-Lain secara automatik terus daripada fail Excel anda</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Papar Cerita Pendek, Rumusan &amp; Pengajaran dahulu — murid betul-betul baca sebelum rekod diisi</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>270 buku siap isi merentas 9 kategori dalam Koleksi Premium</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Kesan &amp; langkau rekod pendua (duplicate) automatik, terus ke rekod seterusnya</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Mod isi pantas tanpa henti untuk bilangan besar rekod sekali gus</li>
-        </ul>
+    <div class="capability-card can" style="max-width:640px; margin:0 auto;">
+      <div class="capability-head">
+        <span class="capability-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <h3>Apa yang berlaku setiap kali</h3>
       </div>
-      <div class="capability-card cant">
-        <div class="capability-head">
-          <span class="capability-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-          </span>
-          <h3>Tidak dibuat</h3>
-        </div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Hanya sokong borang Artikel/Jurnal/Lain-Lain — bukan Buku/E-Buku</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Hanya berfungsi di laman ains.moe.gov.my — bukan sistem lain</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Tidak boleh melangkaui had harian pakej anda</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Progress tidak disimpan bila browser ditutup atau reload — mula semula dari rekod 1</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Bukan produk rasmi Kementerian Pendidikan Malaysia (KPM)</li>
-        </ul>
-      </div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Panel paparkan Cerita Pendek, Rumusan &amp; Pengajaran — murid baca dan sahkan dahulu sebelum apa-apa diisi</li>
+        <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Selepas disahkan, rekod Artikel/Jurnal/Lain-Lain terus diisi ke AINS+ secara automatik</li>
+        <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>270 bahan bacaan siap baca merentas 9 kategori dalam Koleksi Premium</li>
+        <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Kesan &amp; langkau rekod pendua (duplicate) automatik, terus ke rekod seterusnya</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -525,7 +499,7 @@
         <div class="plan-price">RM0</div>
         <div class="plan-limit">2 buku / hari</div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Isi automatik</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Baca &amp; isi automatik</li>
           <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Koleksi Premium (guna sahaja)</li>
         </ul>
         <div class="plan-cta">
@@ -576,7 +550,7 @@
 <div class="cta-band">
   <div class="wrap">
     <h2>Sedia jimatkan masa anda?</h2>
-    <p>Pasang extension AINS+ AutoFill di Chrome Web Store dan mula percuma hari ini.</p>
+    <p>Pasang AINS+ Reader Helper di Chrome Web Store dan mula percuma hari ini.</p>
     <a href="https://chromewebstore.google.com/detail/ains+-autofill/hhplibgfeefdjaepfnfjhjdlohdmhbbe" class="btn" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5H11L10 22L19.5 9.5H13L13 2Z" fill="currentColor"/></svg>
       Pasang Extension
@@ -586,7 +560,7 @@
 
 <footer>
   <div class="wrap">
-    <span>© 2026 AINS+ AutoFill. Bukan produk rasmi Kementerian Pendidikan Malaysia.</span>
+    <span>© 2026 AINS+ Reader Helper. Bukan produk rasmi Kementerian Pendidikan Malaysia.</span>
     <span>Pembayaran melalui QR — bank atau eWallet</span>
   </div>
 </footer>
