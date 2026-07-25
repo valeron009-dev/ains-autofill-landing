@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Langganan — AINS+ AutoFill</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root {
+    --bg: #08080f;
+    --bg-elev: #0f0f1a;
+    --surface: #13131f;
+    --surface-hover: #17172a;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.16);
+    --text: #f4f4f8;
+    --muted: #8f8fa3;
+    --indigo: #6d5bf5;
+    --indigo-bright: #8b7bff;
+    --violet: #a78bfa;
+    --sun: #f5a524;
+    --mint: #34d399;
+    --danger: #f87171;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(8,8,15,0.75);
+    backdrop-filter: blur(14px);
+    z-index: 10;
+  }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+  .logo-mark {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(155deg, var(--indigo-bright), var(--indigo));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px -2px rgba(109,91,245,0.7), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .logo-mark svg { width: 18px; height: 18px; }
+  .back-link { font-size: 13.5px; color: var(--muted); text-decoration: none; font-weight: 500; }
+  .back-link:hover { color: var(--text); }
+
+  .page-head { padding: 56px 0 40px; text-align: center; }
+  .page-head h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .page-head p { color: var(--muted); font-size: 16px; max-width: 520px; margin: 0 auto; }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 26px;
+    margin-bottom: 20px;
+  }
+  .step-label {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .step-badge {
+    width: 30px; height: 30px; flex-shrink: 0;
+    border-radius: 9px;
+    background: linear-gradient(155deg, rgba(109,91,245,0.35), rgba(167,139,250,0.15));
+    border: 1px solid rgba(139,123,255,0.35);
+    color: var(--violet);
+    font-size: 14px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-label h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.015em; }
+
+  /* --- Langkah 1: pemilih plan --- */
+  .plan-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .plan-opt {
+    background: var(--bg-elev);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 14px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    color: var(--text);
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+  .plan-opt:hover { border-color: var(--border-hover); background: var(--surface-hover); transform: translateY(-2px); }
+  .plan-opt.active {
+    border-color: var(--indigo-bright);
+    background: rgba(109,91,245,0.14);
+    box-shadow: 0 0 24px -10px rgba(109,91,245,0.8);
+  }
+  .plan-opt-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .plan-opt-price { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .plan-opt-price span { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .plan-opt-limit { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* --- Langkah 2: bayar --- */
+  .pay-grid { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
+  .qr-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 10px;
+    width: 260px;
+    flex-shrink: 0;
+  }
+  .qr-box img { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .amount-label { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+  .amount-value {
+    font-size: clamp(40px, 7vw, 58px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    background: linear-gradient(100deg, var(--indigo-bright), var(--violet) 60%, var(--sun));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .amount-plan { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .amount-empty { font-size: 20px; font-weight: 700; color: var(--muted); }
+  .pay-note {
+    margin-top: 18px;
+    font-size: 13.5px; color: var(--muted);
+    display: flex; align-items: flex-start; gap: 9px;
+  }
+  .pay-note svg { width: 16px; height: 16px; color: var(--sun); flex-shrink: 0; margin-top: 3px; }
+
+  /* --- Langkah 3: borang --- */
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 7px; }
+  .field label .opt { color: var(--muted); font-weight: 400; }
+  .field input {
+    width: 100%;
+    background: var(--bg-elev);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14.5px;
+    transition: border-color 0.2s ease;
+  }
+  .field input::placeholder { color: #5a5a6e; }
+  .field input:focus { outline: none; border-color: var(--indigo-bright); }
+  .field-hint { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+
+  .warn {
+    display: flex; gap: 11px; align-items: flex-start;
+    background: rgba(245,165,36,0.09);
+    border: 1px solid rgba(245,165,36,0.3);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
+    color: #f0d9ae;
+  }
+  .warn svg { width: 17px; height: 17px; color: var(--sun); flex-shrink: 0; margin-top: 2px; }
+  .warn strong { color: #ffd591; }
+
+  .submit-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    background: linear-gradient(100deg, #4be07a, #22c55e);
+    color: #06240f;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15.5px;
+    padding: 15px 28px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 34px -10px rgba(34,197,94,0.75);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 0 42px -8px rgba(34,197,94,0.9); }
+  .submit-btn:disabled { filter: grayscale(0.85) brightness(0.6); cursor: not-allowed; box-shadow: none; }
+  .submit-btn svg { width: 19px; height: 19px; }
+
+  /* --- Panel selepas hantar --- */
+  .after {
+    display: none;
+    margin-top: 20px;
+    background: rgba(52,211,153,0.08);
+    border: 1px solid rgba(52,211,153,0.32);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .after.show { display: block; }
+  .after h3 { font-size: 15.5px; font-weight: 700; color: var(--mint); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .after h3 svg { width: 18px; height: 18px; }
+  .after ol { margin: 0 0 0 18px; font-size: 14px; color: var(--text); }
+  .after li { padding: 4px 0; }
+  .after li strong { color: #7ff0c0; }
+  .after .fallback { margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .after .fallback a { color: var(--indigo-bright); }
+
+  .post-note {
+    margin-top: 26px;
+    font-size: 13.5px;
+    color: var(--muted);
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .post-note strong { color: var(--text); }
+
+  footer {
+    padding: 32px 0;
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 720px) {
+    .pay-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 22px; }
+    .qr-box { width: min(260px, 78vw); }
+    .plan-picker { grid-template-columns: 1fr; }
+    .pay-note { text-align: left; }
+    .page-head { padding: 40px 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.5C4 3.67 4.67 3 5.5 3H12V21H5.5C4.67 21 4 20.33 4 19.5V4.5Z" fill="white" fill-opacity="0.9"/><path d="M20 4.5C20 3.67 19.33 3 18.5 3H12V21H18.5C19.33 21 20 20.33 20 19.5V4.5Z" fill="white" fill-opacity="0.6"/></svg>
+      </span>
+      AINS+ AutoFill
+    </a>
+    <a class="back-link" href="index.html">← Kembali</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="page-head">
+    <h1>Langgan AINS+ AutoFill</h1>
+    <p>Tiga langkah mudah — pilih pakej, imbas QR untuk bayar, dan hantar bukti pembayaran melalui WhatsApp.</p>
+  </div>
+
+  <!-- LANGKAH 1 -->
+  <div class="step-card">
+    <div class="step-label">
+      <span class="step-badge">1</span>
+      <h2>Pilih pakej anda</h2>
+    </div>
+    <div class="plan-picker" id="planPicker">
+      <button type="button" class="plan-opt" data-plan="pro">
+        <div class="plan-opt-name">Pro</div>
+        <div class="plan-opt-price">RM15<span>/bulan</span></div>
+        <div class="plan-opt-limit">10 buku / hari</div>
+      </button>
+      <button type="button" class="plan-opt" data-plan="pro-plus">
+        <div class="plan-opt-name">Pro Plus</div>
+        <div class="plan-opt-price">RM25<span>/bulan</span></div>
+        <div class="plan-opt-limit">20 buku / hari</div>
+      </button>
+      <button type="button" class="plan-opt" data-plan="pro-max">
+        <div class="plan-opt-name">Pro Max</div>
+        <div class="plan-opt-price">RM35<span>/bulan</span></div>
+        <div class="plan-opt-limit">30 buku / hari</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- LANGKAH 2 -->
+  <div class="step-card">
+    <div class="step-label">
+      <span class="step-badge">2</span>
+      <h2>Imbas &amp; bayar</h2>
+    </div>
+    <div class="pay-grid">
+      <div class="qr-box">
+        <img src="qr.jpg" alt="Kod QR pembayaran — Malaysia National QR">
+      </div>
+      <div>
+        <div class="amount-label">Jumlah untuk dibayar</div>
+        <div id="amountBox">
+          <div class="amount-empty">Pilih pakej di Langkah 1 dahulu</div>
+        </div>
+        <div class="pay-note">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Kod QR ini <strong>jumlah terbuka</strong> — anda perlu taip sendiri jumlah di atas dalam aplikasi bank atau eWallet anda. Sila pastikan jumlahnya betul.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANGKAH 3 -->
+  <div class="step-card">
+    <div class="step-label">
+      <span class="step-badge">3</span>
+      <h2>Hantar bukti pembayaran</h2>
+    </div>
+
+    <div class="warn">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><strong>Penting:</strong> Emel yang anda isi di bawah mesti <strong>sama persis</strong> dengan emel yang anda masukkan dalam extension. Langganan diikat pada emel ini — emel tak sama, langganan tidak akan aktif.</span>
+    </div>
+
+    <form id="proofForm" novalidate>
+      <div class="field">
+        <label for="nama">Nama penuh</label>
+        <input type="text" id="nama" name="nama" placeholder="Nama seperti dalam bukti pembayaran" required>
+      </div>
+
+      <div class="field">
+        <label for="emel">Emel ID Delima</label>
+        <input type="email" id="emel" name="emel" placeholder="nama@moe-dl.edu.my" autocomplete="email" required>
+        <div class="field-hint">Emel yang sama anda guna dalam extension AINS+ AutoFill.</div>
+      </div>
+
+      <div class="field">
+        <label for="rujukan">No. rujukan transaksi <span class="opt">(pilihan)</span></label>
+        <input type="text" id="rujukan" name="rujukan" placeholder="Contoh: 20260725123456">
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn" disabled>
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-1.99 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.07.69.53.25.61.86 2.11.94 2.26.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.39-.45.53-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.66-.15.27.1 1.71.81 2 .96.3.15.5.22.57.35.08.13.08.74-.17 1.44Z"/></svg>
+        Hantar melalui WhatsApp
+      </button>
+    </form>
+
+    <div class="after" id="afterPanel">
+      <h3>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        WhatsApp telah dibuka
+      </h3>
+      <ol>
+        <li>Butiran anda sudah <strong>siap ditaip</strong> dalam mesej tersebut.</li>
+        <li><strong>Lampirkan screenshot</strong> bukti pembayaran anda — tekan ikon 📎 (klip) dalam WhatsApp dan pilih gambar.</li>
+        <li>Tekan <strong>Hantar</strong>.</li>
+      </ol>
+      <div class="fallback">
+        WhatsApp tidak terbuka? <a id="fallbackLink" href="#" target="_blank" rel="noopener">Klik di sini untuk buka secara manual</a>
+      </div>
+    </div>
+
+    <div class="post-note">
+      <strong>Selepas anda hantar:</strong> pembayaran akan disemak secara manual, dan
+      <strong>kod aktivasi</strong> akan dihantar kepada anda melalui WhatsApp yang sama.
+      Masukkan kod tersebut dalam ruangan <strong>🔑 Activation Code</strong> di panel extension untuk mengaktifkan langganan anda.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 AINS+ AutoFill. Bukan produk rasmi Kementerian Pendidikan Malaysia.</span>
+    <span>Pembayaran melalui QR — bank atau eWallet</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var WHATSAPP_NUMBER = '60168353984'; // 016-835 3984 dalam format antarabangsa
+
+  var PLANS = {
+    'pro':      { name: 'Pro',      price: 15, limit: 10 },
+    'pro-plus': { name: 'Pro Plus', price: 25, limit: 20 },
+    'pro-max':  { name: 'Pro Max',  price: 35, limit: 30 }
+  };
+
+  var selectedPlan = null;
+
+  var planPicker = document.getElementById('planPicker');
+  var amountBox = document.getElementById('amountBox');
+  var submitBtn = document.getElementById('submitBtn');
+  var form = document.getElementById('proofForm');
+  var afterPanel = document.getElementById('afterPanel');
+  var fallbackLink = document.getElementById('fallbackLink');
+
+  function render() {
+    // Tandakan butang plan yang aktif
+    var buttons = planPicker.querySelectorAll('.plan-opt');
+    for (var i = 0; i < buttons.length; i++) {
+      var isActive = buttons[i].getAttribute('data-plan') === selectedPlan;
+      buttons[i].classList.toggle('active', isActive);
+      buttons[i].setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    }
+
+    // Papar jumlah. Sengaja TIADA plan lalai — jumlah salah bermakna wang sebenar
+    // terbayar salah, jadi pengguna mesti pilih sendiri sebelum boleh hantar.
+    if (selectedPlan) {
+      var plan = PLANS[selectedPlan];
+      amountBox.innerHTML =
+        '<div class="amount-value">RM' + plan.price + '</div>' +
+        '<div class="amount-plan">Pakej ' + plan.name + ' — ' + plan.limit + ' buku sehari, 31 hari</div>';
+      submitBtn.disabled = false;
+    } else {
+      amountBox.innerHTML = '<div class="amount-empty">Pilih pakej di Langkah 1 dahulu</div>';
+      submitBtn.disabled = true;
+    }
+  }
+
+  function buildWhatsAppUrl() {
+    var plan = PLANS[selectedPlan];
+    var rujukan = document.getElementById('rujukan').value.trim();
+
+    var lines = [
+      'Hai, saya nak langgan AINS+ AutoFill.',
+      '',
+      'Pakej: ' + plan.name + ' (RM' + plan.price + '/bulan)',
+      'Nama: ' + document.getElementById('nama').value.trim(),
+      'Emel ID Delima: ' + document.getElementById('emel').value.trim(),
+      'No. Rujukan: ' + (rujukan || '-'),
+      '',
+      'Screenshot bukti pembayaran saya lampirkan di bawah.'
+    ];
+
+    return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+  }
+
+  planPicker.addEventListener('click', function (e) {
+    var btn = e.target.closest('.plan-opt');
+    if (!btn) return;
+    selectedPlan = btn.getAttribute('data-plan');
+    render();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!selectedPlan) {
+      alert('Sila pilih pakej anda di Langkah 1 dahulu.');
+      return;
+    }
+    // Pengesahan native (required + type=email) — novalidate pada borang supaya
+    // kita boleh kawal bila ia dicetuskan.
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    var url = buildWhatsAppUrl();
+    fallbackLink.href = url;
+    afterPanel.classList.add('show');
+
+    // window.open boleh dipulangkan null jika penyekat popup menghalangnya —
+    // panel di atas sentiasa dipaparkan supaya pautan manual tetap ada.
+    var win = window.open(url, '_blank');
+    if (win) win.opener = null;
+
+    afterPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // Pra-pilih daripada ?plan= (extension dan kad harga menghantar parameter ini)
+  var param = new URLSearchParams(window.location.search).get('plan');
+  if (param && Object.prototype.hasOwnProperty.call(PLANS, param)) {
+    selectedPlan = param;
+  }
+  render();
+})();
+</script>
+
+</body>
+</html>

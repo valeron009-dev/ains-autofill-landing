@@ -252,6 +252,44 @@
   .plan li { padding: 6px 0; display: flex; align-items: center; gap: 8px; }
   .plan li svg { width: 15px; height: 15px; color: var(--mint); flex-shrink: 0; }
 
+  .plan-cta { margin-top: auto; padding-top: 22px; }
+  .btn-plan {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    background: rgba(109,91,245,0.14);
+    border: 1px solid rgba(139,123,255,0.35);
+    color: var(--indigo-bright);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+  .btn-plan:hover {
+    background: rgba(109,91,245,0.26);
+    border-color: rgba(139,123,255,0.6);
+    transform: translateY(-1px);
+  }
+  .btn-plan.ghost {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--muted);
+  }
+  .btn-plan.ghost:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+  .plan.featured .btn-plan {
+    background: linear-gradient(100deg, #ffc250, var(--sun));
+    border-color: transparent;
+    color: #1a1200;
+    box-shadow: 0 0 26px -8px rgba(245,165,36,0.7);
+  }
+  .plan.featured .btn-plan:hover { box-shadow: 0 0 34px -6px rgba(245,165,36,0.9); }
+
   .cta-band {
     position: relative;
     overflow: hidden;
@@ -397,8 +435,11 @@
         <div class="plan-limit">2 buku / hari</div>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Isi automatik</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Template Excel</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Koleksi Premium (guna sahaja)</li>
         </ul>
+        <div class="plan-cta">
+          <a href="https://chromewebstore.google.com/detail/ains+-autofill/hhplibgfeefdjaepfnfjhjdlohdmhbbe" class="btn-plan ghost" target="_blank" rel="noopener">Pasang Percuma</a>
+        </div>
       </div>
       <div class="plan">
         <div class="plan-name">Pro</div>
@@ -406,8 +447,11 @@
         <div class="plan-limit">10 buku / hari</div>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Semua ciri Percuma</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Had harian lebih tinggi</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Muat turun fail koleksi</li>
         </ul>
+        <div class="plan-cta">
+          <a href="langganan.html?plan=pro" class="btn-plan">Langgan Sekarang</a>
+        </div>
       </div>
       <div class="plan">
         <div class="plan-name">Pro Plus</div>
@@ -415,8 +459,11 @@
         <div class="plan-limit">20 buku / hari</div>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Semua ciri Pro</li>
-          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Akses Koleksi Premium</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Had harian lebih tinggi</li>
         </ul>
+        <div class="plan-cta">
+          <a href="langganan.html?plan=pro-plus" class="btn-plan">Langgan Sekarang</a>
+        </div>
       </div>
       <div class="plan featured">
         <span class="plan-tag">Paling Popular</span>
@@ -427,6 +474,9 @@
           <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Semua ciri Pro Plus</li>
           <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Had harian tertinggi</li>
         </ul>
+        <div class="plan-cta">
+          <a href="langganan.html?plan=pro-max" class="btn-plan">Langgan Sekarang</a>
+        </div>
       </div>
     </div>
   </div>
@@ -436,7 +486,7 @@
   <div class="wrap">
     <h2>Sedia jimatkan masa anda?</h2>
     <p>Pasang extension AINS+ AutoFill di Chrome Web Store dan mula percuma hari ini.</p>
-    <a href="#" class="btn">
+    <a href="https://chromewebstore.google.com/detail/ains+-autofill/hhplibgfeefdjaepfnfjhjdlohdmhbbe" class="btn" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5H11L10 22L19.5 9.5H13L13 2Z" fill="currentColor"/></svg>
       Pasang Extension
     </a>
@@ -446,7 +496,7 @@
 <footer>
   <div class="wrap">
     <span>© 2026 AINS+ AutoFill. Bukan produk rasmi Kementerian Pendidikan Malaysia.</span>
-    <span>Dikuasakan oleh Stripe & ExtensionPay</span>
+    <span>Pembayaran melalui QR — bank atau eWallet</span>
   </div>
 </footer>
 
