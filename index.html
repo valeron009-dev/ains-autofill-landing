@@ -196,6 +196,56 @@
   .step h3 { font-size: 17.5px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
   .step p { font-size: 14.5px; color: var(--muted); }
 
+  .capability-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .capability-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px 30px;
+  }
+  .capability-card.can {
+    border-color: rgba(52,211,153,0.25);
+    background: linear-gradient(180deg, rgba(52,211,153,0.05), var(--surface) 40%);
+  }
+  .capability-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 22px;
+  }
+  .capability-icon {
+    width: 34px; height: 34px; flex-shrink: 0;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .can .capability-icon {
+    background: rgba(52,211,153,0.14);
+    border: 1px solid rgba(52,211,153,0.3);
+  }
+  .can .capability-icon svg { width: 17px; height: 17px; color: var(--mint); }
+  .cant .capability-icon {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+  }
+  .cant .capability-icon svg { width: 17px; height: 17px; color: var(--muted); }
+  .capability-head h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .cant .capability-head h3 { color: var(--muted); }
+  .capability-card ul { list-style: none; }
+  .capability-card li {
+    display: flex; align-items: flex-start; gap: 11px;
+    padding: 10px 0;
+    font-size: 14.5px;
+    border-top: 1px solid var(--border);
+  }
+  .capability-card li:first-of-type { border-top: none; padding-top: 0; }
+  .can li { color: var(--text); }
+  .cant li { color: var(--muted); }
+  .capability-card li svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 3px; }
+  .can li svg { color: var(--mint); }
+  .cant li svg { color: rgba(255,255,255,0.22); }
+
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -338,7 +388,7 @@
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
   @media (max-width: 720px) {
-    .steps, .pricing-grid { grid-template-columns: 1fr; }
+    .steps, .pricing-grid, .capability-grid { grid-template-columns: 1fr; }
     .hero { padding: 76px 0 56px; }
     .plan.featured { transform: none; }
     .plan.featured:hover { transform: translateY(-4px); }
@@ -423,6 +473,47 @@
 </section>
 
 <section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Kejujuran dahulu</span>
+      <h2>Apa yang extension ini boleh — dan tidak — buat</h2>
+    </div>
+    <div class="capability-grid">
+      <div class="capability-card can">
+        <div class="capability-head">
+          <span class="capability-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Boleh dibuat</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Isi rekod Artikel/Jurnal/Lain-Lain secara automatik terus daripada fail Excel anda</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Papar Cerita Pendek, Rumusan &amp; Pengajaran dahulu — murid betul-betul baca sebelum rekod diisi</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>270 buku siap isi merentas 9 kategori dalam Koleksi Premium</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Kesan &amp; langkau rekod pendua (duplicate) automatik, terus ke rekod seterusnya</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Mod isi pantas tanpa henti untuk bilangan besar rekod sekali gus</li>
+        </ul>
+      </div>
+      <div class="capability-card cant">
+        <div class="capability-head">
+          <span class="capability-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Tidak dibuat</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Hanya sokong borang Artikel/Jurnal/Lain-Lain — bukan Buku/E-Buku</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Hanya berfungsi di laman ains.moe.gov.my — bukan sistem lain</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Tidak boleh melangkaui had harian pakej anda</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Progress tidak disimpan bila browser ditutup atau reload — mula semula dari rekod 1</li>
+          <li><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Bukan produk rasmi Kementerian Pendidikan Malaysia (KPM)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Harga</span>
